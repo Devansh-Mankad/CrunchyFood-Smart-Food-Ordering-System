@@ -174,13 +174,13 @@ def admin_menu():
         cur.execute(
             """
             INSERT INTO menu_items
-            (name,description,price,image)
+            (item_name,price,description,image)
             VALUES(%s,%s,%s,%s)
             """,
             (
                 name,
-                description,
                 price,
+                description,
                 filename
             )
         )
@@ -189,7 +189,7 @@ def admin_menu():
         db.close()
         
         flash("Food Item Added Successfully.", "success")
-        return redirect(url_for("add_item"))
+        return redirect(url_for("admin_menu"))
     return render_template("add_item.html")
 
 # Service
@@ -246,15 +246,16 @@ def add_cart():
         cur.execute(
             """
             INSERT INTO cart
-            (user_id,item_id,item_name,item_price,quantity)
-            VALUES(%s,%s,%s,%s,%s)
+            (user_id,item_id,item_name,item_price,quantity,total_price)
+            VALUES(%s,%s,%s,%s,%s,%s)
             """,
             (
                 user_id,
                 item_id,
                 item_name,
                 item_price,
-                quantity
+                quantity,
+                item_price*quantity
             )
         )
         db.commit()
@@ -317,8 +318,8 @@ def place_order():
         cur.close()
         db.close()
         return redirect(url_for("cart"))
+    
     total_order_price = 0
-
     for item in cart_items:
         total_order_price += float(item[6])
 
@@ -360,7 +361,7 @@ def place_order():
     return redirect(
         url_for(
             "order",
-            order_id=order_id
+            order_id=order_id,
         )
     )
 
@@ -400,13 +401,13 @@ def order_history():
     )
 
 # Order Summary
-@app.route("/order/<float:total_order_price>")
-def order(total_order_price):
+@app.route("/order/<int:order_id>")
+def order(order_id):
     if not session.get("logged_in"):
         flash("Please login first.", "warning")
         return redirect(url_for("login"))
 
-    user_id = session.get("user_id")
+    user_id = session["user_id"]
     db = get_db()
     cur = db.cursor()
 
@@ -415,9 +416,19 @@ def order(total_order_price):
         (user_id,)
     )
     user = cur.fetchone()
+
     cur.execute(
-        "SELECT * FROM orders WHERE user_id=%s",
-        (user_id,)
+        "SELECT * FROM orders WHERE order_id=%s",
+        (order_id,)
+    )
+    order = cur.fetchone()
+    cur.execute(
+        """
+        SELECT *
+        FROM order_items
+        WHERE order_id=%s
+        """,
+        (order_id,)
     )
     order_items = cur.fetchall()
     cur.close()
@@ -427,7 +438,7 @@ def order(total_order_price):
         "order.html",
         user=user,
         order_items=order_items,
-        total_order_price=total_order_price
+        total_order_price=order[2]
     )
 
 # Checkout
@@ -437,39 +448,55 @@ def checkout():
         flash("Please login first.", "warning")
         return redirect(url_for("login"))
 
-    user_id = session.get("user_id")
+    user_id = session["user_id"]
+
     db = get_db()
     cur = db.cursor()
 
-    current_time = datetime.datetime.now()
-    cur.execute(
-        "SELECT * FROM orders WHERE user_id=%s",
-        (user_id,)
-    )
+    # Get latest order
+    cur.execute("""
+        SELECT *
+        FROM orders
+        WHERE user_id=%s
+        ORDER BY order_id DESC
+        LIMIT 1
+    """, (user_id,))
+
+    order = cur.fetchone()
+
+    if not order:
+        flash("No order found.", "warning")
+        cur.close()
+        db.close()
+        return redirect(url_for("menu"))
+
+    order_id = order[0]
+    total_order_price = order[2]
+
+    # Get all ordered items
+    cur.execute("""
+        SELECT *
+        FROM order_items
+        WHERE order_id=%s
+    """, (order_id,))
+
     order_items = cur.fetchall()
-    total_order_price = 0
 
-    for item in order_items:
-        total_order_price += item[6]
-
-    cur.execute(
-        "SELECT address FROM users WHERE user_id=%s",
-        (user_id,)
-    )
+    # Get user's address
+    cur.execute("""
+        SELECT address
+        FROM users
+        WHERE user_id=%s
+    """, (user_id,))
 
     user = cur.fetchone()
     address = user[0] if user else "Address Not Available"
 
-    cur.execute(
-        "DELETE FROM orders WHERE user_id=%s",
-        (user_id,)
-    )
-
-    db.commit()
     cur.close()
     db.close()
 
-    delivery_time = current_time + datetime.timedelta(minutes=22)
+    delivery_time = datetime.datetime.now() + datetime.timedelta(minutes=22)
+
     return render_template(
         "my_order.html",
         total_order_price=total_order_price,
