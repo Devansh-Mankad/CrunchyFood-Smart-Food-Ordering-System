@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/service">Services</a></li>
+            <li><a href="/cart" class="active">Cart</a></li>
+            {% if session.logged_in %}
+            <li><a href="/profile">My Profile</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="cart-section">
+    <div class="cart-header">
+        <h1>🛒 My Cart</h1>
+        <p>
+            Review your selected food items before placing your order.
+        </p>
+    </div>
+    {% if cart %}
+    <div class="cart-grid">
+        {% for cart_item in cart %}
+        <div class="cart-card">
+            <div class="cart-content">
+                <h2>{{ cart_item.item_name }}</h2>
+                <div class="cart-details">
+                    <span class="price">
+                        ₹{{ cart_item.item_price }}
+                    </span>
+                    <span class="quantity">
+                        Qty : {{ cart_item.quantity }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cart-actions">
+        <form action="{{ url_for('place_order') }}" method="POST">
+            <button type="submit" class="order-btn">Place Order</button>
+
+        </form>
+        <a href="/menu" class="continue-btn">Continue Shopping</a>
+    </div>
+
+    {% else %}
+    <div class="empty-cart">
+        <div class="empty-icon">🛒</div>
+        <h2>Your Cart is Empty</h2>
+        <p>
+            Looks like you haven't added any delicious food yet.
+        </p>
+        <a href="/menu" class="shop-btn">
+            Browse Menu
+        </a>
+    </div>
+    {% endif %}
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Smart Food Ordering System developed using
+                Python Flask, HTML, CSS and MySQL.
+                Enjoy fresh food with quick and reliable delivery.
+            </p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/service">Servces</a>
+            <a href="/cart">Cart</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | All Rights Reserved
+    </div>
+</footer>
+</body>
+</html>

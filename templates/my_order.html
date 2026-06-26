@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_order.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/service">Services</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/profile">My Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="order-section">
+    <div class="order-card">
+        <div class="success-icon">
+            ✔
+        </div>
+        <h1>Order Confirmed</h1>
+
+        <p class="subtitle">
+            Thank you for ordering with <strong>Crunchy Food</strong>.
+            Your delicious meal is being prepared.
+        </p>
+
+        <div class="status-box">
+            <h3>Current Status</h3>
+            <span class="status confirmed">
+                Confirmed
+            </span>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Total Amount</h4>
+                <p>₹{{ total_order_price }}</p>
+            </div>
+
+            <div class="info-card">
+                <h4>Payment Mode</h4>
+                <p>Cash on Delivery</p>
+            </div>
+            <div class="info-card">
+
+                <h4>Estimated Delivery</h4>
+                <p>{{ delivery_time }}</p>
+            </div>
+
+            <div class="info-card">
+                <h4>Delivery Address</h4>
+                <p>{{ address }}</p>
+            </div>
+        </div>
+
+        <div class="message-box">
+            <h3>Thank You!</h3>
+            <p>
+                Your order has been successfully placed.
+                Our delivery partner will reach your location soon.
+            </p>
+        </div>
+
+        <div class="button-group">
+            <a href="/" class="home-btn">
+                Back to Home
+            </a>
+
+            <a href="/menu" class="menu-btn">
+                Order More
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Smart Food Ordering System developed using
+                Flask, HTML, CSS and MySQL.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | All Rights Reserved
+    </div>
+</footer>
+
+</body>
+</html>

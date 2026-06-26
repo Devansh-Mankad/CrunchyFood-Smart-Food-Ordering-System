@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/service">Services</a></li>
+            <li><a href="/cart">Cart</a></li>
+            {% if session.logged_in %}
+                <li><a href="/profile">My Profile</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="order-section">
+    <div class="order-container">
+        <div class="page-title">
+            <h1>Order Summary</h1>
+            <p>Please review your order before proceeding to checkout.</p>
+        </div>
+
+        <div class="customer-card">
+            <div class="customer-item">
+                <h4>Customer Email</h4>
+                <p>{{ user[1] }}</p>
+            </div>
+            <div class="customer-item">
+                <h4>Payment Mode</h4>
+                <p>Cash on Delivery</p>
+            </div>
+            <div class="customer-item">
+                <h4>Delivery</h4>
+                <p>Estimated 20-25 Minutes</p>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order_item in order_items %}
+                    <tr>
+                        <td>{{ order_item[3] }}</td>
+                        <td>{{ order_item[5] }}</td>
+                        <td>₹{{ order_item[4] }}</td>
+                        <td>₹{{ order_item[6] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary-card">
+            <div class="summary-row">
+                <span>Delivery Charges</span>
+                <span>Free</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Taxes</span>
+                <span>Included</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>Grand Total</span>
+                <span>₹{{ total_order_price }}</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="/menu" class="continue-btn">
+                Continue Shopping
+            </a>
+
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <button type="submit" class="checkout-btn">
+                    Proceed to Checkout
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Smart Food Ordering System developed using
+                Flask, HTML, CSS and MySQL.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | All Rights Reserved
+    </div>
+
+</footer>
+</body>
+</html>

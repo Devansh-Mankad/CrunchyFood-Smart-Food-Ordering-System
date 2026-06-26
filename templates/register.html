@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/regi.css') }}">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            🍔 <span>Crunchy Food</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/menu">Menu</a></li>
+                <li><a href="/service">Services</a></li>
+                <li><a href="/cart">Cart</a></li>
+                {% if session.logged_in %}
+                    <li><a href="/profile">My Profile</a></li>
+                {% else %}
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <section class="register-section">
+        <div class="register-container">
+            <div class="register-left">
+                <h1>Join Crunchy Food</h1>
+                <p>
+                    Create your account and enjoy fresh food delivered
+                    quickly to your doorstep.
+                </p>
+                <img src="{{ url_for('static', filename='images/background.jpg') }}" alt="Crunchy Food">
+            </div>
+
+            <div class="register-right">
+                <h2>Create Account</h2>
+                <p class="subtitle">
+                    Smart Food Ordering System
+                </p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="register-form">
+                    <div class="input-box">
+                        <label>Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create password"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+                        <label>User Type</label>
+                        <select name="user" required>
+                            <option value="">Select User Type</option>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Delivery Address</label>
+                        <textarea
+                            name="address"
+                            rows="3"
+                            placeholder="Enter your address"
+                            required></textarea>
+
+                    </div>
+                    <button type="submit" class="register-btn">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="login-link">
+                    Already have an account?
+                    <a href="/login">
+                        Login Here
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h2>Crunchy Food</h2>
+                <p>
+                    Smart Food Ordering System built using
+                    Flask, HTML, CSS and MySQL.
+                </p>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>📍 Sector 22, Gandhinagar</p>
+                <p>📧 info@crunchyfood.com</p>
+                <p>📞 +91 7984759756</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2026 Crunchy Food | All Rights Reserved
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/service">Services</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/profile">My Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="profile-section">
+    <div class="profile-card">
+        <div class="profile-avatar">
+
+            👤
+        </div>
+        <h2>Welcome</h2>
+        <p>
+            Manage your Crunchy Food account from one place.
+        </p>
+
+        <div class="profile-grid">
+            <a href="/menu" class="profile-box">
+                <div class="icon">🍽</div>
+                <h3>Browse Menu</h3>
+                <p>Explore delicious food items.</p>
+            </a>
+
+            <a href="/cart" class="profile-box">
+                <div class="icon">🛒</div>
+                <h3>My Cart</h3>
+                <p>View items added to your cart.</p>
+            </a>
+
+            <a href="/my_orders" class="profile-box">
+                <div class="icon">📦</div>
+                <h3>My Orders</h3>
+                <p>Check your previous orders.</p>
+            </a>
+
+            <a href="/logout" class="profile-box logout">
+                <div class="icon">🚪</div>
+                <h3>Logout</h3>
+                <p>Sign out from your account.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Smart Food Ordering System developed using Flask, HTML, CSS and MySQL.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | All Rights Reserved
+    </div>
+</footer>
+</body>
+</html>

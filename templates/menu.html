@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+
+<body>
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu" class="active">Menu</a></li>
+            <li><a href="/service">Services</a></li>
+            <li><a href="/cart">Cart</a></li>
+            {% if session.logged_in %}
+            <li><a href="/profile">My Profile</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="menu-hero">
+    <div class="hero-content">
+        <h1>Discover Delicious Food</h1>
+        <p>
+            Freshly prepared meals made with quality ingredients and delivered to your doorstep.
+        </p>
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search your favourite food...">
+            <button
+                type="button"
+                id="searchBtn">
+                🔍 Search
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="menu-section">
+    <div class="section-title">
+        <h2>Our Special Menu</h2>
+        <p>
+            Choose your favourite meal and add it to your cart.
+        </p>
+    </div>
+
+    <div class="menu-grid">
+        {% for item in menu_items %}
+        <div class="food-card">
+            <div class="food-image">
+                <img
+                    src="{{ url_for('static', filename='images/uploads/' + item.image) }}"
+                    alt="{{ item.name }}">
+
+                <span class="rating">
+                    ⭐ 4.8
+                </span>
+            </div>
+
+            <div class="food-content">
+                <h3 class="food-name">
+                    {{ item.name }}
+                </h3>
+                {% if item.description %}
+                <p class="description">
+                    {{ item.description }}
+                </p>
+                {% else %}
+                <p class="description">
+                    Fresh & Delicious
+                </p>
+                {% endif %}
+                <div class="price-row">
+                    <span class="price">
+                        ₹{{ item.price }}
+                    </span>
+                    <span class="tag">
+                        Fresh
+                    </span>
+                </div>
+
+                <form action="{{ url_for('add_cart') }}" method="POST">
+                    <input
+                        type="hidden"
+                        name="item_id"
+                        value="{{ item.id }}">
+                    <div class="cart-controls">
+                        <div class="quantity-box">
+                            <label>Qty</label>
+                            <input
+                                type="number"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                max="10">
+                        </div>
+
+                        <button type="submit" class="cart-btn">🛒 Add to Cart</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <p
+        id="noResult"
+        style="display:none;text-align:center;font-size:24px;margin-top:35px;color:#666;font-weight:600;">
+        😔 No food item found.
+    </p>
+</section>
+
+<section class="offer-section">
+    <div class="offer-card">
+        <div class="offer-content">
+            <h2>🎉 Today's Special Offer</h2>
+            <p>
+                Get <strong>10% OFF</strong> on orders above
+                <strong>₹499</strong>.
+                Freshly prepared food with quick delivery at your doorstep.
+            </p>
+
+            <a href="/cart" class="offer-btn">
+                View Cart
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                We deliver fresh and delicious food with quality service
+                and fast delivery.
+            </p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/service">Services</a>
+            <a href="/cart">Cart</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | All Rights Reserved
+    </div>
+</footer>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const noResult = document.getElementById("noResult");
+
+function searchFood(){
+    const searchText = searchInput.value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".food-card");
+    let found = false;
+    cards.forEach(function(card){
+        const foodName = card.querySelector(".food-name").textContent.toLowerCase();
+        if(foodName.includes(searchText)){
+            card.style.display = "block";
+            found = true;
+        }else{
+            card.style.display = "none";
+        }
+    });
+    noResult.style.display = found ? "none" : "block";
+}
+
+searchInput.addEventListener("keyup", searchFood);
+searchBtn.addEventListener("click", searchFood);
+searchInput.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        e.preventDefault();
+        searchFood();
+    }
+});
+
+</script>
+</body>
+</html>

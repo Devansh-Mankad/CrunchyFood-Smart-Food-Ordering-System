@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/service.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/service" class="active">Services</a></li>
+            <li><a href="/cart">Cart</a></li>
+            {% if session.logged_in %}
+                <li><a href="/profile">My Profile</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Our Services</h1>
+        <p>
+            Delicious food, quick delivery and premium customer experience at your fingertips.
+        </p>
+    </div>
+</section>
+
+<section class="services">
+    <h2>Why Choose Crunchy Food?</h2>
+    <div class="service-grid">
+
+        <div class="service-card">
+            <div class="service-icon">😊</div>
+            <h3>Friendly Service</h3>
+            <p>
+                Our team is committed to providing a warm welcome and excellent customer support for every order.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">⭐</div>
+            <h3>Premium Quality</h3>
+            <p>
+                Every meal is prepared using fresh ingredients to deliver the best taste and quality.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🌍</div>
+
+            <h3>Global Flavours</h3>
+            <p>
+                Explore delicious dishes inspired by cuisines from around the world.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🏡</div>
+            <h3>Great Atmosphere</h3>
+            <p>
+                We create memorable dining experiences with clean kitchens and quality service.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🍕</div>
+            <h3>Freshly Prepared</h3>
+            <p>
+                Every order is freshly cooked after confirmation to ensure the best taste.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🥗</div>
+            <h3>Natural Ingredients</h3>
+            <p>
+                We use carefully selected fresh vegetables, spices and ingredients in every meal.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="gallery">
+    <h2>Our Kitchen & Food</h2>
+    <div class="gallery-grid">
+        <img src="{{ url_for('static', filename='images/service.jpg') }}" alt="Service">
+        <img src="{{ url_for('static', filename='images/service1.jpg') }}" alt="Food">
+        <img src="{{ url_for('static', filename='images/service2.jpg') }}" alt="Kitchen">
+    </div>
+</section>
+
+<section class="delivery">
+    <div class="delivery-content">
+        <h2>Fast Delivery Across Gandhinagar</h2>
+        <p>
+            We deliver hot and fresh food directly to your doorstep with secure packaging and quick service. Your satisfaction is our highest priority.
+        </p>
+        <a href="/menu" class="order-btn">
+            Order Now
+        </a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Smart Food Ordering System developed using Flask, HTML, CSS and MySQL.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+
+        © 2026 Crunchy Food | All Rights Reserved
+    </div>
+</footer>
+</body>
+</html>

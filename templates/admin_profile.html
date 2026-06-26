@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_profile.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin_menu">Add Items</a></li>
+            <li><a href="/edit_menu">Edit Menu</a></li>
+            <li><a href="/admin_profile" class="active">My Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="profile-section">
+    <div class="profile-card">
+        <div class="profile-icon">
+            👨‍💼
+        </div>
+        <h1>Administrator</h1>
+        <p>
+            Welcome to the Crunchy Food Admin Panel.
+            Manage menu items and monitor the food ordering system efficiently.
+        </p>
+
+        <div class="profile-info">
+            <div class="info-box">
+                <h3>Role</h3>
+                <span>Administrator</span>
+            </div>
+            <div class="info-box">
+                <h3>System</h3>
+                <span>Crunchy Food</span>
+            </div>
+        </div>
+
+        <a href="/logout">
+            <button class="logout-btn">Logout</button>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Admin dashboard for managing menu items and customer orders.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | Admin Panel
+    </div>
+
+</footer>
+</body>
+</html>

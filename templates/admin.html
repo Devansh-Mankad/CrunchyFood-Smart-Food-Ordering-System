@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/admin" class="active">Dashboard</a></li>
+            <li><a href="/admin_menu">Add Items</a></li>
+            <li><a href="/edit_menu">Edit Menu</a></li>
+            {% if session.logged_in %}
+            <li><a href="/admin_profile">My Profile</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Admin Dashboard</h1>
+        <p>
+
+            Welcome to the Crunchy Food Management System.
+            Manage menu items and keep your restaurant updated.
+        </p>
+        <div class="hero-buttons">
+            <a href="/admin_menu" class="primary-btn">Add Food Item</a>
+
+            <a href="/edit_menu" class="secondary-btn">Edit Menu</a>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard">
+    <h2>Quick Actions</h2>
+    <div class="dashboard-grid">
+        <a href="/admin_menu" class="dashboard-card">
+            <div class="card-icon">🍕</div>
+            <h3>Add New Item</h3>
+            <p>Add new food items to your restaurant menu.</p>
+        </a>
+
+        <a href="/edit_menu" class="dashboard-card">
+            <div class="card-icon">📝</div>
+            <h3>Edit Menu</h3>
+            <p>Update price and description of existing items.</p>
+        </a>
+
+        <a href="/admin_profile" class="dashboard-card">
+            <div class="card-icon">👤</div>
+            <h3>Profile</h3>
+            <p>View administrator profile and logout securely.</p>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Admin dashboard for managing restaurant menu items and maintaining the food ordering system.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="/admin">Dashboard</a>
+            <a href="/admin_menu">Add Items</a>
+            <a href="/edit_menu">Edit Menu</a>
+            <a href="/admin_profile">My Profile</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | Admin Dashboard
+    </div>
+
+</footer>
+</body>
+</html>

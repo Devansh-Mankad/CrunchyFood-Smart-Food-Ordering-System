@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Menu | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_menu.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin_menu">Add Items</a></li>
+            <li><a href="/edit_menu" class="active">Edit Menu</a></li>
+            {% if session.logged_in %}
+            <li><a href="/admin_profile">My Profile</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="edit-section">
+    <div class="edit-card">
+        <h1>Edit Menu Item</h1>
+        <p>
+            Update the details of any existing food item.
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <label>Food Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter food name"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>New Price</label>
+                <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    step="0.01"
+                    placeholder="Enter new price"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Enter updated description"
+                    required></textarea>
+
+            </div>
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food Admin</h2>
+            <p>
+                Manage menu items quickly and keep your food catalog updated.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | Admin Panel
+    </div>
+
+</footer>
+</body>
+</html>
