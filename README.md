@@ -70,7 +70,7 @@ Crunchy_Food/
 
 🚀 Installation
 1. Clone the repository
-  git clone https://github.com/your-username/Crunchy_Food.git
+  git clone https://github.com/Devansh-Mankad/CrunchyFood-Smart-Food-Ordering-System.git
 2. Move into the project
   cd Crunchy_Food
 3. Install dependencies
