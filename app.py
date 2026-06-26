@@ -143,7 +143,71 @@ def admin():
     if session.get("user_type") != "admin":
         flash("Access Denied.", "danger")
         return redirect(url_for("index"))
-    return render_template("admin.html")
+
+    db = get_db()
+    cur = db.cursor()
+
+    # Total Revenue
+    cur.execute("SELECT IFNULL(SUM(total_price),0) FROM orders")
+    revenue = cur.fetchone()[0]
+    # Total Orders
+    cur.execute("SELECT COUNT(*) FROM orders")
+    total_orders = cur.fetchone()[0]
+    # Total Users
+    cur.execute("SELECT COUNT(*) FROM users WHERE user_type='user'")
+    users = cur.fetchone()[0]
+    # Total Menu Items
+    cur.execute("SELECT COUNT(*) FROM menu_items")
+    menu_items = cur.fetchone()[0]
+    # Pending Orders
+    cur.execute("SELECT COUNT(*) FROM orders WHERE status='Pending'")
+    pending = cur.fetchone()[0]
+    # Delivered Orders
+    cur.execute("SELECT COUNT(*) FROM orders WHERE status='Delivered'")
+    delivered = cur.fetchone()[0]
+
+    # Top Selling Food Items
+    cur.execute("""
+        SELECT
+            item_name,
+            SUM(quantity) AS total_quantity,
+            SUM(total_price) AS revenue
+        FROM order_items
+        GROUP BY item_name
+        ORDER BY total_quantity DESC
+        LIMIT 5
+    """)
+    top_foods = cur.fetchall()
+
+    # Recent Orders
+    cur.execute("""
+        SELECT
+            order_id,
+            user_id,
+            total_price,
+            status,
+            payment_method,
+            order_date
+        FROM orders
+        ORDER BY order_date DESC
+        LIMIT 10
+    """)
+    recent_orders = cur.fetchall()
+
+    cur.close()
+    db.close()
+
+    return render_template(
+        "admin.html",
+        revenue=revenue,
+        total_orders=total_orders,
+        users=users,
+        menu_items=menu_items,
+        pending=pending,
+        delivered=delivered,
+        top_foods=top_foods,
+        recent_orders=recent_orders
+    )
 
 # Admin Menu
 @app.route("/admin_menu", methods=["GET", "POST"])
