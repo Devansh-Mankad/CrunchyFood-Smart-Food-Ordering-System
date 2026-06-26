@@ -376,3 +376,205 @@ footer{
         font-size:32px;
     }
 }
+
+/* SALES ANALYTICS */
+.analytics{
+    padding:30px 8% 70px;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-heading h2{
+    font-size:38px;
+    color:#2563eb;
+    margin-bottom:12px;
+}
+
+.section-heading p{
+    color:#6b7280;
+    font-size:16px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+}
+
+.stat-card{
+    padding:30px;
+    border-radius:18px;
+    color:#fff;
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-6px);
+}
+
+.stat-card h4{
+    font-size:17px;
+    font-weight:500;
+    opacity:.9;
+    margin-bottom:12px;
+}
+
+.stat-card h2{
+    font-size:34px;
+    font-weight:700;
+}
+
+.revenue{
+    background:linear-gradient(135deg,#16a34a,#15803d);
+}
+
+.orders{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+
+.users{
+    background:linear-gradient(135deg,#9333ea,#7e22ce);
+}
+
+.menu{
+    background:linear-gradient(135deg,#f97316,#ea580c);
+}
+
+.pending{
+    background:linear-gradient(135deg,#facc15,#ca8a04);
+}
+
+.delivered{
+    background:linear-gradient(135deg,#14b8a6,#0f766e);
+}
+
+/* TABLES */
+.top-food,
+.recent-orders{
+    padding:0 8% 70px;
+}
+
+.table-container{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.dashboard-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.dashboard-table thead{
+    background:#2563eb;
+    color:#fff;
+}
+
+.dashboard-table th{
+    padding:18px;
+    font-size:15px;
+    text-align:left;
+}
+
+.dashboard-table td{
+    padding:18px;
+    border-bottom:1px solid #e5e7eb;
+    color:#374151;
+}
+
+.dashboard-table tbody tr{
+    transition:.25s;
+}
+
+.dashboard-table tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* STATUS BADGES*/
+.status{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.status.pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status.preparing{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.status.shipping{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.status.delivered{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.cancelled{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+/* RESPONSIVE*/
+@media(max-width:768px){
+
+    .analytics,
+    .top-food,
+    .recent-orders{
+        padding-left:6%;
+        padding-right:6%;
+    }
+
+    .section-heading h2{
+        font-size:30px;
+    }
+
+    .dashboard-table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    .stat-card h2{
+        font-size:28px;
+    }
+}
+
+@media(max-width:480px){
+
+    .section-heading h2{
+        font-size:26px;
+    }
+
+    .section-heading p{
+        font-size:14px;
+    }
+
+    .stat-card{
+        padding:22px;
+    }
+
+    .stat-card h2{
+        font-size:26px;
+    }
+
+    .dashboard-table th,
+    .dashboard-table td{
+        padding:14px;
+        font-size:14px;
+    }
+}

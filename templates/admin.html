@@ -67,6 +67,158 @@
     </div>
 </section>
 
+<section class="analytics">
+    <div class="section-heading">
+        <h2>📊 Sales Analysis Dashboard</h2>
+        <p>
+            Monitor restaurant performance and business statistics.
+        </p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card revenue">
+            <h4>Total Revenue</h4>
+            <h2>₹{{ revenue }}</h2>
+        </div>
+
+        <div class="stat-card orders">
+            <h4>Total Orders</h4>
+            <h2>{{ total_orders }}</h2>
+        </div>
+
+        <div class="stat-card users">
+            <h4>Total Users</h4>
+            <h2>{{ users }}</h2>
+        </div>
+
+        <div class="stat-card menu">
+            <h4>Menu Items</h4>
+            <h2>{{ menu_items }}</h2>
+        </div>
+
+        <div class="stat-card pending">
+            <h4>Pending Orders</h4>
+            <h2>{{ pending }}</h2>
+        </div>
+
+        <div class="stat-card delivered">
+            <h4>Delivered Orders</h4>
+            <h2>{{ delivered }}</h2>
+        </div>
+    </div>
+</section>
+
+<section class="top-food">
+    <div class="section-heading">
+        <h2>🍕 Top Selling Food Items</h2>
+        <p>
+            Most ordered food items by customers.
+        </p>
+    </div>
+
+    <div class="table-container">
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Food Item</th>
+                    <th>Quantity Sold</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if top_foods %}
+                    {% for item in top_foods %}
+                    <tr>
+                        <td>#{{ loop.index }}</td>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+
+                    <tr>
+                        <td colspan="3" style="text-align:center;">
+                            No sales available.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="recent-orders">
+    <div class="section-heading">
+        <h2>🛒 Recent Orders</h2>
+        <p>
+            Latest customer orders placed on Crunchy Food.
+        </p>
+    </div>
+
+    <div class="table-container">
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Order Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if recent_orders %}
+                    {% for order in recent_orders %}
+                    <tr>
+                        <td>#{{ order[0] }}</td>
+                        <td>{{ order[1] }}</td>
+                        <td>₹{{ order[2] }}</td>
+                        <td>
+                            {% if order[3] == "Pending" %}
+                                <span class="status pending">
+                                    {{ order[3] }}
+                                </span>
+
+                            {% elif order[3] == "Preparing" %}
+                                <span class="status preparing">
+                                    {{ order[3] }}
+                                </span>
+                            {% elif order[3] == "Out for Delivery" %}
+
+                                <span class="status shipping">
+                                    {{ order[3] }}
+                                </span>
+
+                            {% elif order[3] == "Delivered" %}
+                                <span class="status delivered">
+                                    {{ order[3] }}
+                                </span>
+                            {% else %}
+                                <span class="status cancelled">
+                                    {{ order[3] }}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>{{ order[4] }}</td>
+                        <td>{{ order[5] }}</td>
+                    </tr>
+                    {% endfor %}
+
+                {% else %}
+                    <tr>
+                        <td colspan="6" style="text-align:center;padding:25px;">
+                            No recent orders available.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
 <footer>
     <div class="footer-container">
         <div class="footer-about">
