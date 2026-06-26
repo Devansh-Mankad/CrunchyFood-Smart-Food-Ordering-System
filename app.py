@@ -538,5 +538,59 @@ def admin_profile():
         return redirect(url_for("index"))
     return render_template("admin_profile.html")
 
+@app.route("/order_status")
+def admin_orders():
+    if not session.get("logged_in") or session.get("user_type") != "admin":
+        flash("Unauthorized Access.", "danger")
+        return redirect(url_for("login"))
+
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("""
+        SELECT
+            o.order_id,
+            u.email,
+            o.total_price,
+            o.status,
+            o.payment_method,
+            o.order_date
+        FROM orders o
+        JOIN users u
+            ON o.user_id = u.user_id
+        ORDER BY o.order_date DESC
+    """)
+
+    orders = cur.fetchall()
+    cur.close()
+    db.close()
+
+    return render_template(
+        "admin_orders.html",
+        orders=orders
+    )
+
+@app.route("/update_order_status/<int:order_id>", methods=["POST"])
+def update_order_status(order_id):
+    if not session.get("logged_in") or session.get("user_type") != "admin":
+        flash("Unauthorized Access.", "danger")
+        return redirect(url_for("login"))
+
+    status = request.form.get("status")
+    db = get_db()
+    cur = db.cursor()
+
+    cur.execute("""
+        UPDATE orders
+        SET status=%s
+        WHERE order_id=%s
+    """, (status, order_id))
+
+    db.commit()
+    cur.close()
+    db.close()
+
+    flash("Order status updated successfully.", "success")
+    return redirect(url_for("admin_orders"))
+
 if __name__ == "__main__":
     app.run(debug=True)
