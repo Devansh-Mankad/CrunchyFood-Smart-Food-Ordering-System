@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders | Crunchy Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_orders.css') }}">
+</head>
+
+<body>
+<header class="navbar">
+    <div class="logo">
+        🍔 <span>Crunchy Food</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin_menu">Add Items</a></li>
+            <li><a href="/edit_menu">Edit Menu</a></li>
+            <li><a href="/admin_orders" class="active">Orders</a></li>
+            {% if session.logged_in %}
+            <li><a href="/admin_profile">My Profile</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="orders-section">
+    <div class="title">
+        <h1>Customer Orders</h1>
+        <p>
+            View and manage customer orders.
+        </p>
+    </div>
+    {% if orders %}
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>#{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>₹{{ order[2] }}</td>
+                <td>{{ order[4] }}</td>
+                <td>{{ order[5] }}</td>
+                <td>
+                    <form
+                        action="{{ url_for('update_order_status', order_id=order[0]) }}"
+                        method="POST">
+                        <select name="status">
+                            <option value="Pending"
+                                {% if order[3]=='Pending' %}selected{% endif %}>
+                                Pending
+                            </option>
+                            <option value="Preparing"
+                                {% if order[3]=='Preparing' %}selected{% endif %}>
+                                Preparing
+                            </option>
+                            <option value="Out for Delivery"
+                                {% if order[3]=='Out for Delivery' %}selected{% endif %}>
+                                Out for Delivery
+                            </option>
+                            <option value="Delivered"
+                                {% if order[3]=='Delivered' %}selected{% endif %}>
+                                Delivered
+                            </option>
+                            <option value="Cancelled"
+                                {% if order[3]=='Cancelled' %}selected{% endif %}>
+                                Cancelled
+                            </option>
+                        </select>
+                </td>
+                <td>
+                        <button class="update-btn">
+                            Update
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty">
+        <h2>No Orders Yet</h2>
+        <p>
+            There are currently no customer orders.
+        </p>
+    </div>
+    {% endif %}
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Crunchy Food</h2>
+            <p>
+                Admin dashboard for managing
+                customer orders efficiently.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>📍 Sector 22, Gandhinagar</p>
+            <p>📧 info@crunchyfood.com</p>
+            <p>📞 +91 7984759756</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Crunchy Food | Admin Panel
+    </div>
+
+</footer>
+</body>
+</html>

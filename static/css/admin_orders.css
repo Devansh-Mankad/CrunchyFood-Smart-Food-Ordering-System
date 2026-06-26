@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f8fafc;
+    color:#1f2937;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+.navbar{
+    width:100%;
+    height:80px;
+    padding:0 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(12px);
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:28px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.logo span{
+    color:#f97316;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+nav ul li a{
+    color:#1f2937;
+    font-weight:500;
+    position:relative;
+    transition:.3s;
+}
+
+nav ul li a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:3px;
+    background:#f97316;
+    border-radius:20px;
+    transition:.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active{
+    color:#f97316;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after{
+    width:100%;
+}
+
+.orders-section{
+    padding:130px 8% 70px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.title h1{
+    font-size:38px;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.title p{
+    color:#6b7280;
+    font-size:16px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+thead{
+    background:#2563eb;
+    color:#fff;
+}
+
+thead th{
+    padding:18px;
+    font-weight:600;
+    font-size:16px;
+}
+
+tbody td{
+    padding:18px;
+    text-align:center;
+    border-bottom:1px solid #e5e7eb;
+    font-size:15px;
+}
+
+tbody tr:hover{
+    background:#f8fbff;
+}
+
+select{
+    width:180px;
+    padding:10px;
+    border:2px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
+    font-size:14px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+select:focus{
+    border-color:#2563eb;
+}
+
+.update-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.update-btn:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+    box-shadow:0 10px 18px rgba(37,99,235,.25);
+}
+
+.empty{
+    text-align:center;
+    background:#fff;
+    padding:50px;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.empty h2{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.empty p{
+    color:#6b7280;
+}
+
+footer{
+    background:#111827;
+    color:#fff;
+    margin-top:60px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:50px 8%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:40px;
+}
+
+.footer-about h2{
+    color:#f97316;
+    margin-bottom:15px;
+}
+
+.footer-about p{
+    color:#d1d5db;
+    line-height:1.8;
+}
+
+.footer-contact h3{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.footer-contact p{
+    color:#d1d5db;
+    margin-bottom:10px;
+    line-height:1.8;
+}
+
+.copyright{
+    text-align:center;
+    padding:18px;
+    border-top:1px solid rgba(255,255,255,.1);
+    color:#9ca3af;
+    font-size:15px;
+}
+
+@media(max-width:992px){
+
+    .orders-section{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:900px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        height:auto;
+        padding:18px;
+    }
+
+    nav ul{
+        margin-top:15px;
+        gap:18px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .orders-section{
+        padding:170px 6% 60px;
+    }
+
+    .title h1{
+        font-size:30px;
+    }
+
+    .footer-container{
+        text-align:center;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .logo{
+        font-size:22px;
+    }
+
+    nav ul{
+        gap:12px;
+    }
+
+    nav ul li a{
+        font-size:14px;
+    }
+
+    .title h1{
+        font-size:24px;
+    }
+
+    .title p{
+        font-size:14px;
+    }
+
+    thead th,
+    tbody td{
+        padding:14px;
+        font-size:13px;
+    }
+
+    select{
+        width:150px;
+        font-size:13px;
+    }
+
+    .update-btn{
+        padding:8px 14px;
+        font-size:13px;
+    }
+
+    .footer-about h2,
+    .footer-contact h3{
+        font-size:22px;
+    }
+
+    .footer-about p,
+    .footer-contact p{
+        font-size:14px;
+    }
+
+    .copyright{
+        font-size:13px;
+    }
+
+}
