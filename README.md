@@ -192,31 +192,26 @@ http://127.0.0.1:5000
 
 # 📸 Screenshots
 
-> Add screenshots of the following pages to showcase the application:
-
 * Home Page
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0b6a8c10-efb8-48c2-8714-d18e19c2d443" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/61842402-a01f-4d93-9cbc-9869a0fffd9f" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/efe9b337-d47c-45ff-9b6b-bc0baa6956f4" />
+
 * Login Page
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/48c57f3a-e7f4-4b44-8a95-267ff1a283a5" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4ebf51d9-74c7-4ddb-8138-35e3ac26cb0e" />
+
 * Menu Page
-* Shopping Cart
-* Customer Dashboard
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9533aaa-2134-4bcb-86b0-8441524d119c" />
+
 * Admin Dashboard
+<img width="1900" height="887" alt="image" src="https://github.com/user-attachments/assets/eba9c5e8-27ee-473e-be8c-aa9b1b20e75c" />
+
 * Sales Analytics
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/939511e8-abf4-4bca-b79a-963a11e41453" />
 
 ---
 
-# 🤝 Contributing
-
-Contributions are welcome!
-
-If you'd like to improve this project:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push the branch
-5. Open a Pull Request
-
----
 
 # 📄 License
 
@@ -227,8 +222,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 # 👨‍💻 Developer
 
 **Devansh Mankad**
-
-Computer Engineering Student • Python Developer • Full Stack Developer • AI & Machine Learning Enthusiast
+GitHub : https://github.com/Devansh-Mankad
 
 ---
 
